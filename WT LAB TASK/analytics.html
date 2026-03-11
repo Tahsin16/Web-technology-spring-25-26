@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Event Analytics</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+#analyticsPanel{
+display:none;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<h2>Event Analytics Dashboard</h2>
+
+<button id="toggleBtn" class="btn btn-primary" onclick="toggleAnalytics()">
+Show Event Analytics
+</button>
+
+<div id="analyticsPanel">
+
+<hr>
+
+<div class="row">
+
+<div class="col-md-4">
+<div class="card text-center">
+<div class="card-body">
+<h4>Total Registrants</h4>
+<h2 id="total">0</h2>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card text-center">
+<div class="card-body">
+<h4>Virtual</h4>
+<h2 id="virtual">0</h2>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card text-center">
+<div class="card-body">
+<h4>In Person</h4>
+<h2 id="person">0</h2>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// Data stored only in JavaScript array
+let registrations = [
+
+{name:"A", type:"Virtual"},
+{name:"B", type:"In-Person"},
+{name:"C", type:"Virtual"}
+
+];
+
+let visible = false;
+
+function toggleAnalytics(){
+
+let panel = document.getElementById("analyticsPanel");
+let button = document.getElementById("toggleBtn");
+
+if(!visible){
+
+panel.style.display="block";
+
+button.innerText="Hide Event Analytics";
+
+showStats();
+
+visible=true;
+
+}
+
+else{
+
+panel.style.display="none";
+
+button.innerText="Show Event Analytics";
+
+visible=false;
+
+}
+
+}
+
+function showStats(){
+
+let virtual=0;
+let person=0;
+
+registrations.forEach(function(r){
+
+if(r.type==="Virtual")
+virtual++;
+else
+person++;
+
+});
+
+document.getElementById("total").innerText = registrations.length;
+document.getElementById("virtual").innerText = virtual;
+document.getElementById("person").innerText = person;
+
+}
+
+</script>
+
+</body>
+</html>
