@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login Form</title>
+
+<style>
+
+body{
+font-family: Arial;
+background: linear-gradient(135deg,#4facfe,#00f2fe);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.container{
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+width:320px;
+text-align:center;
+}
+
+h2{
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#4facfe;
+border:none;
+color:white;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0084ff;
+}
+
+.error{
+color:red;
+font-size:14px;
+text-align:left;
+}
+
+.counter{
+margin-top:15px;
+color:#333;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Login</h2>
+
+<form onsubmit="return validateForm()">
+
+<input type="text" id="email" placeholder="Enter Email">
+<div id="emailError" class="error"></div>
+
+<input type="password" id="password" placeholder="Enter Password">
+<div id="passError" class="error"></div>
+
+<button type="submit">Login</button>
+
+</form>
+
+<div id="count" class="counter"></div>
+
+</div>
+
+<script>
+
+let wrongCount = 0;
+
+function validateForm(){
+
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+let emailError = "";
+let passError = "";
+let valid = true;
+
+
+if(!email.includes("@")){
+emailError = "Email must contain @";
+valid = false;
+}
+
+
+if(password.length < 6){
+passError = "Password must be at least 6 characters";
+valid = false;
+}
+
+
+if(!password.includes("#")){
+passError += "<br>Password must contain #";
+valid = false;
+}
+
+
+document.getElementById("emailError").innerHTML = emailError;
+document.getElementById("passError").innerHTML = passError;
+
+
+if(!valid){
+wrongCount++;
+document.getElementById("count").innerHTML =
+"Wrong submission attempts: " + wrongCount;
+return false;
+}
+
+return true;
+
+}
+
+</script>
+
+</body>
+</html>
